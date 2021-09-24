@@ -166,9 +166,17 @@ const SubmitButton = (props) => {
 };
 
 export const Form = (props) => {
+  const handleSubmit = (e) => {
+    console.log("Submitted!")
+    e.preventDefault();
+    // if (!value) return;
+    // addTodo(value);
+    // setValue("");
+  };
+
   return (
     <div className="md:w-1/2">
-      <form id={props.formID}>
+      <form id={props.formID} onSubmit={handleSubmit}>
         <div className="
             bg-white
             overflow-hidden
@@ -188,12 +196,6 @@ export const Form = (props) => {
                   key={index}
                 />
               ))}
-              
-              {/*
-                  
-         
-                  
-              */}
             </div>
           </div>
           <div className="px-4 py-4 sm:px-6 text-right">

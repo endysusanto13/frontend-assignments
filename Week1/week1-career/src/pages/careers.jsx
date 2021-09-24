@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Form } from '../components/form';
+import { CareerListing } from '../components/career-listing';
+
 
 const formData = {
     "formID": "career-form",
@@ -75,6 +77,95 @@ const formData = {
               ]
 };
 
+const jobs = [
+  {
+    descriptions: [
+      "Create memes using the latest memes template",
+      "Resurrect outdated memes templates by changing wordings to reflect latest trend",
+      "Able to tell joke without appearing trying too hard",
+    ],
+    requirements: [
+      "Knowledge of latest memes template",
+      "Creative but not destructive",
+      "Balls to make fun of your boss",
+    ],
+    _id: "60f1bf2ddcd48a001f4f9e74",
+    title: "Memer",
+    department: "UI / UX Design",
+    level: "experienced",
+    summary:
+      "The Design team plays an important role in Shopit. The team covers the entire range of product UI/UX design, including the user-growth, promotion, wallet and payment, checkout, retention, listings and users, search and recommendation etc. The team is also responsible for the branding visual identities and elements of Shopit, including logos, mascots, stickers, and internal physical products.",
+    headcount: 20,
+    createdAt: "2021-07-16T17:17:33.183Z",
+    updatedAt: "2021-07-16T17:17:33.183Z",
+    __v: 0,
+  },
+  {
+    descriptions: [
+      "Post random tech articles to keep the team updated on latest tech trends.",
+      'Use emoji with conflicting message content, e.g. "I disagree with your opinion and I think that\'s stupid :)"',
+      "Add Gif to make the chatroom seems exciting.",
+    ],
+    requirements: [
+      "Knowledge of latest tech trends is mandatory",
+      "Knowledge of best practices of Gif and Memes",
+    ],
+    _id: "60f1bf2ddcd48a001f4f9e6b",
+    title: "Slack Chatter",
+    department: "Engineering",
+    level: "entry",
+    summary:
+      "The Engineering teams at Shopit is the core competency of Shopit by utilizing next-gen Blockchain virtual currency and display them in an interactive platform using VR/AR best practices.",
+    headcount: 2,
+    createdAt: "2021-07-16T17:17:33.170Z",
+    updatedAt: "2021-07-16T17:17:33.170Z",
+    __v: 0,
+  },
+  {
+    descriptions: [
+      "Groom yourself perfectly so that we can dazzle the candidates to work for us",
+      "Apply the art of subtlety to attracts candiates without causing feeling of being cheated",
+      'Post inspirational quotes and stories on LinkedIn. It is fine if there is no real info that you want to share, as long as you ends your post with "Agree?"',
+    ],
+    requirements: [
+      "Good-looking is mandatory. Normal looking can be considered if you have a nice voice and good Photoshop skill (Instagram filter doesn't count, it's too common so everyone can tell at once).",
+      "Good in writing email and bad in writing other stuffs. This is to attract candidates before they join and confuse them when they are hired.",
+      "Genuine interest to other people and good in making others talking.",
+    ],
+    _id: "60f1bf2ddcd48a001f4f9e60",
+    title: "Recruiter",
+    department: "Human Resources",
+    level: "experienced",
+    summary:
+      "The Human Resources teams at Shopit is what makes the Engineering teams here possible. By having an attractive appearance, HR attracts talents that wish to interact with them before they realize HR is working in different building in Shopit",
+    headcount: 1,
+    createdAt: "2021-07-16T17:17:33.155Z",
+    updatedAt: "2021-07-16T17:17:33.155Z",
+    __v: 0,
+  },
+  {
+    descriptions: [
+      'Add comments on GitHub issue with "+1", "This is not Stack Overflow", and "Closed because irrelevant"',
+      "Push a commit everyday by removing/adding a space to make repository seems active.",
+      "Copy paste entire content of a random logs file and use it to raise GitHub issue on competitor's repository to create the perception of bugginess of the library.",
+    ],
+    requirements: [
+      "Master degree or outstanding writing skill is required.",
+      "Good sense of humour.",
+    ],
+    _id: "60f1bf2ddcd48a001f4f9e57",
+    title: "GitHub Issue Commentor",
+    department: "Engineering",
+    level: "internship",
+    summary:
+      "The Engineering teams at Shopit is the core competency of Shopit by utilizing next-gen Blockchain virtual currency and display them in an interactive platform using VR/AR best practices.",
+    headcount: 2,
+    createdAt: "2021-07-16T17:17:33.144Z",
+    updatedAt: "2021-07-16T17:17:33.144Z",
+    __v: 0,
+  },
+];
+
 export const Careers = () => {
   return (
     <div className="max-w-6xl mx-auto px-3 py-12 space-y-6">
@@ -91,290 +182,9 @@ export const Careers = () => {
             submitBtnName={formData.submitBtnName}
             fields={formData.fields}
           />
-        {/*
-          <ul className="md:flex-1 space-y-3" id="career-list">
-            <li className="js-career-item">
-              <div className="bg-white shadow overflow-hidden sm:rounded-md">
-                <div className="px-4 py-4 flex items-center sm:px-6">
-                  <div className="
-                      min-w-0
-                      flex-1
-                      sm:flex sm:items-center sm:justify-between
-                    ">
-                    <div>
-                      <div className="
-                          text-sm
-                          leading-5
-                          font-medium
-                          text-pink-600
-                          truncate
-                        ">
-                        Memer
-                        <span className="ml-1 font-normal text-gray-500">in UI / UX Design
-                        </span>
-                      </div>
-                      <div className="mt-2 flex">
-                        <div className="
-                            flex
-                            items-center
-                            gap-2
-                            text-sm
-                            leading-5
-                            text-gray-500
-                          ">
-                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400">
-                            <path fill-rule="evenodd" d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clip-rule="evenodd"></path>
-                            <path d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z"></path></svg><span>Level: Experienced </span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="
-                      ml-5
-                      flex-shrink-0
-                      inline-flex
-                      items-center
-                      justify-center
-                      gap-2
-                    ">
-                    <button type="button" className="
-                        js-delete-btn
-                        p-1
-                        rounded-full
-                        hover:bg-gray-50
-                        focus:outline-none
-                        focus:bg-gray-50
-                        focus:ring
-                        focus:ring-pink-500
-                        focus:ring-opacity-30
-                        transition
-                        duration-150
-                        ease-in-out
-                      " title="Delete">
-                      <svg className="w-5 h-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path>
-                      </svg>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </li>
-
-            <li className="js-career-item">
-              <div className="bg-white shadow overflow-hidden sm:rounded-md">
-                <div className="px-4 py-4 flex items-center sm:px-6">
-                  <div className="
-                      min-w-0
-                      flex-1
-                      sm:flex sm:items-center sm:justify-between
-                    ">
-                    <div>
-                      <div className="
-                          text-sm
-                          leading-5
-                          font-medium
-                          text-pink-600
-                          truncate
-                        ">
-                        Slack Chatter
-                        <span className="ml-1 font-normal text-gray-500">in Engineering
-                        </span>
-                      </div>
-                      <div className="mt-2 flex">
-                        <div className="
-                            flex
-                            items-center
-                            gap-2
-                            text-sm
-                            leading-5
-                            text-gray-500
-                          ">
-                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400">
-                            <path fill-rule="evenodd" d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clip-rule="evenodd"></path>
-                            <path d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z"></path></svg><span>Level: Entry </span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="
-                      ml-5
-                      flex-shrink-0
-                      inline-flex
-                      items-center
-                      justify-center
-                      gap-2
-                    ">
-                    <button type="button" className="
-                        js-delete-btn
-                        p-1
-                        rounded-full
-                        hover:bg-gray-50
-                        focus:outline-none
-                        focus:bg-gray-50
-                        focus:ring
-                        focus:ring-pink-500
-                        focus:ring-opacity-30
-                        transition
-                        duration-150
-                        ease-in-out
-                      " title="Delete">
-                      <svg className="w-5 h-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path>
-                      </svg>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </li>
-
-            <li className="js-career-item">
-              <div className="bg-white shadow overflow-hidden sm:rounded-md">
-                <div className="px-4 py-4 flex items-center sm:px-6">
-                  <div className="
-                      min-w-0
-                      flex-1
-                      sm:flex sm:items-center sm:justify-between
-                    ">
-                    <div>
-                      <div className="
-                          text-sm
-                          leading-5
-                          font-medium
-                          text-pink-600
-                          truncate
-                        ">
-                        Janitor
-                        <span className="ml-1 font-normal text-gray-500">in Health/Wellfare
-                        </span>
-                      </div>
-                      <div className="mt-2 flex">
-                        <div className="
-                            flex
-                            items-center
-                            gap-2
-                            text-sm
-                            leading-5
-                            text-gray-500
-                          ">
-                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400">
-                            <path fill-rule="evenodd" d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clip-rule="evenodd"></path>
-                            <path d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z"></path></svg><span>Level: Experienced </span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="
-                      ml-5
-                      flex-shrink-0
-                      inline-flex
-                      items-center
-                      justify-center
-                      gap-2
-                    ">
-                    <button type="button" className="
-                        js-delete-btn
-                        p-1
-                        rounded-full
-                        hover:bg-gray-50
-                        focus:outline-none
-                        focus:bg-gray-50
-                        focus:ring
-                        focus:ring-pink-500
-                        focus:ring-opacity-30
-                        transition
-                        duration-150
-                        ease-in-out
-                      " title="Delete">
-                      <svg className="w-5 h-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path>
-                      </svg>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </li>
-
-            <li className="js-career-item">
-              <div className="bg-white shadow overflow-hidden sm:rounded-md">
-                <div className="px-4 py-4 flex items-center sm:px-6">
-                  <div className="
-                      min-w-0
-                      flex-1
-                      sm:flex sm:items-center sm:justify-between
-                    ">
-                    <div>
-                      <div className="
-                          text-sm
-                          leading-5
-                          font-medium
-                          text-pink-600
-                          truncate
-                        ">
-                        GitHub Issue Commentor
-                        <span className="ml-1 font-normal text-gray-500">in Engineering
-                        </span>
-                      </div>
-                      <div className="mt-2 flex">
-                        <div className="
-                            flex
-                            items-center
-                            text-sm
-                            leading-5
-                            text-gray-500
-                            gap-2
-                          ">
-                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400">
-                            <path fill-rule="evenodd" d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clip-rule="evenodd"></path>
-                            <path d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z"></path></svg><span>Level: Internship</span>
-                          <span className="
-                              inline-flex
-                              items-center
-                              px-2.5
-                              py-0.5
-                              rounded-full
-                              text-xs
-                              font-medium
-                              bg-green-100
-                              text-green-800
-                            ">
-                            Student-friendly
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="
-                      ml-5
-                      flex-shrink-0
-                      inline-flex
-                      items-center
-                      justify-center
-                      gap-2
-                    ">
-                    <button type="button" className="
-                        js-delete-btn
-                        p-1
-                        rounded-full
-                        hover:bg-gray-50
-                        focus:outline-none
-                        focus:bg-gray-50
-                        focus:ring
-                        focus:ring-pink-500
-                        focus:ring-opacity-30
-                        transition
-                        duration-150
-                        ease-in-out
-                      " title="Delete">
-                      <svg className="w-5 h-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path>
-                      </svg>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </li>
-          </ul>
-          */}
+          <CareerListing
+            jobs={jobs}
+          />
         </div>
       </div>
 
