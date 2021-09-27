@@ -77,98 +77,90 @@ const formData = {
               ]
 };
 
-const jobs = [
+const jobsData = [
   {
-    descriptions: [
-      "Create memes using the latest memes template",
-      "Resurrect outdated memes templates by changing wordings to reflect latest trend",
-      "Able to tell joke without appearing trying too hard",
-    ],
-    requirements: [
-      "Knowledge of latest memes template",
-      "Creative but not destructive",
-      "Balls to make fun of your boss",
-    ],
-    _id: "60f1bf2ddcd48a001f4f9e74",
+    _id: "1",
     title: "Memer",
-    department: "UI / UX Design",
     level: "experienced",
+    department: "UI / UX Design",
     summary:
       "The Design team plays an important role in Shopit. The team covers the entire range of product UI/UX design, including the user-growth, promotion, wallet and payment, checkout, retention, listings and users, search and recommendation etc. The team is also responsible for the branding visual identities and elements of Shopit, including logos, mascots, stickers, and internal physical products.",
     headcount: 20,
-    createdAt: "2021-07-16T17:17:33.183Z",
-    updatedAt: "2021-07-16T17:17:33.183Z",
-    __v: 0,
   },
   {
-    descriptions: [
-      "Post random tech articles to keep the team updated on latest tech trends.",
-      'Use emoji with conflicting message content, e.g. "I disagree with your opinion and I think that\'s stupid :)"',
-      "Add Gif to make the chatroom seems exciting.",
-    ],
-    requirements: [
-      "Knowledge of latest tech trends is mandatory",
-      "Knowledge of best practices of Gif and Memes",
-    ],
-    _id: "60f1bf2ddcd48a001f4f9e6b",
+    _id: "2",
     title: "Slack Chatter",
-    department: "Engineering",
     level: "entry",
+    department: "Engineering",
     summary:
       "The Engineering teams at Shopit is the core competency of Shopit by utilizing next-gen Blockchain virtual currency and display them in an interactive platform using VR/AR best practices.",
     headcount: 2,
-    createdAt: "2021-07-16T17:17:33.170Z",
-    updatedAt: "2021-07-16T17:17:33.170Z",
-    __v: 0,
   },
   {
-    descriptions: [
-      "Groom yourself perfectly so that we can dazzle the candidates to work for us",
-      "Apply the art of subtlety to attracts candiates without causing feeling of being cheated",
-      'Post inspirational quotes and stories on LinkedIn. It is fine if there is no real info that you want to share, as long as you ends your post with "Agree?"',
-    ],
-    requirements: [
-      "Good-looking is mandatory. Normal looking can be considered if you have a nice voice and good Photoshop skill (Instagram filter doesn't count, it's too common so everyone can tell at once).",
-      "Good in writing email and bad in writing other stuffs. This is to attract candidates before they join and confuse them when they are hired.",
-      "Genuine interest to other people and good in making others talking.",
-    ],
-    _id: "60f1bf2ddcd48a001f4f9e60",
+    _id: "3",
     title: "Recruiter",
-    department: "Human Resources",
     level: "experienced",
+    department: "Human Resources",
     summary:
       "The Human Resources teams at Shopit is what makes the Engineering teams here possible. By having an attractive appearance, HR attracts talents that wish to interact with them before they realize HR is working in different building in Shopit",
     headcount: 1,
-    createdAt: "2021-07-16T17:17:33.155Z",
-    updatedAt: "2021-07-16T17:17:33.155Z",
-    __v: 0,
   },
   {
-    descriptions: [
-      'Add comments on GitHub issue with "+1", "This is not Stack Overflow", and "Closed because irrelevant"',
-      "Push a commit everyday by removing/adding a space to make repository seems active.",
-      "Copy paste entire content of a random logs file and use it to raise GitHub issue on competitor's repository to create the perception of bugginess of the library.",
-    ],
-    requirements: [
-      "Master degree or outstanding writing skill is required.",
-      "Good sense of humour.",
-    ],
-    _id: "60f1bf2ddcd48a001f4f9e57",
+    _id: "4",
     title: "GitHub Issue Commentor",
-    department: "Engineering",
     level: "internship",
+    department: "Engineering",
     summary:
       "The Engineering teams at Shopit is the core competency of Shopit by utilizing next-gen Blockchain virtual currency and display them in an interactive platform using VR/AR best practices.",
     headcount: 2,
-    createdAt: "2021-07-16T17:17:33.144Z",
-    updatedAt: "2021-07-16T17:17:33.144Z",
-    __v: 0,
   },
 ];
 
+let id = 5;
+
 export const Careers = () => {
-  return (
-    <div className="max-w-6xl mx-auto px-3 py-12 space-y-6">
+  const [jobs, setJobs] = useState(jobsData);
+
+  // Create an array to store form values. This array will be passed to component children
+  let initFieldValues = ["", "Internship", "", "", 1];
+  const [fieldValues, setFieldValues] = useState(initFieldValues);
+  
+
+  const addJob = (jobInfoArr) => {
+    const newJobs = [...jobs, {
+      _id: id.toString(),
+      title: jobInfoArr[0],
+      level: jobInfoArr[1],
+      department: jobInfoArr[2],
+      summary: jobInfoArr[3],
+      headcount: jobInfoArr[4],
+    }];
+    setJobs(newJobs);
+    id++
+  };
+  
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (fieldValues.every((field) => { return (field !== "" && field !== 0) })) {
+      addJob(fieldValues)
+    }
+    else {alert("Please enter valid values in the form and do not leave any blanks.")}
+  };
+
+  const updateFieldValues = (value, index) => {
+    const newValues= [...fieldValues];
+    newValues.splice(index, 1, value);
+    setFieldValues(newValues);
+  }
+
+  const removeJob = (index) => {
+    const newJobs = [...jobs];
+    newJobs.splice(index, 1);
+    setJobs(newJobs);
+  };
+    
+    return (
+      <div className="max-w-6xl mx-auto px-3 py-12 space-y-6">
         <div className="mb-8">
           <div>
             <h1 className="text-6xl mb-4 font-extrabold">Careers</h1>
@@ -180,10 +172,13 @@ export const Careers = () => {
             title={formData.title}
             submitBtnTitle={formData.submitBtnTitle}
             submitBtnName={formData.submitBtnName}
+            handleSubmit={handleSubmit}
             fields={formData.fields}
+            updateFieldValues={updateFieldValues}
           />
           <CareerListing
             jobs={jobs}
+            removeJob={removeJob}
           />
         </div>
       </div>

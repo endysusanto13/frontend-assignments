@@ -1,12 +1,12 @@
-import * as React from "react";
+import React from "react";
 
 /** 
-  * Component Form is agnostic and all variables should be defined in page. This is to ensure that form can be used in different pages.
-  * E.g. Form Title, Submit button name, number of fields, field text and etc, will be defined in formData in page
-  * 
+  * This component form is designed to be very general to ensure that it can be reused at different type of pages.
+  * Number of inputs, type of inputs, etc will be defined in variable under 'pages' folder.
 */
 
 const Field = (props) => {
+
   return(
     <div className="lg:grid lg:grid-cols-3 lg:gap-4 lg:items-start">
       <label 
@@ -20,6 +20,8 @@ const Field = (props) => {
           name={props.inputName}
           id={props.inputID}
           inputType={props.inputType}
+          updateFieldValues={props.updateFieldValues}
+          index={props.index}
         />
       </div>
     </div>
@@ -36,6 +38,9 @@ const Input = (props) => {
           id={props.id}
           placeholder={props.inputType.placeholder}
           required="" 
+          onChange={(e) => {
+            props.updateFieldValues(e.target.value, props.index)
+          }}
           className="block w-full shadow-sm sm:text-sm focus:ring-pink-500 focus:border-pink-500 border-gray-300 rounded-md"
         />
       );
@@ -44,7 +49,10 @@ const Input = (props) => {
         <select 
           name={props.name}
           id={props.id}
-          required="" 
+          required=""
+          onChange={(e) => {
+            props.updateFieldValues(e.target.value, props.index)
+          }}
           className=" block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-pink-500 focus:border-pink-500 sm:text-sm rounded-md"
         >
           {props.inputType.options.map((option, index) => (
@@ -64,6 +72,9 @@ const Input = (props) => {
           id={props.id}
           rows={props.inputType.rows} 
           required="" 
+          onChange={(e) => {
+            props.updateFieldValues(e.target.value, props.index)
+          }}
           className="block w-full shadow-sm sm:text-sm focus:ring-pink-500 focus:border-pink-500 border border-gray-300 rounded-md">
         </textarea>
       );
@@ -71,6 +82,8 @@ const Input = (props) => {
       return(
         <NumButton
           id={props.id}
+          updateFieldValues={props.updateFieldValues}
+          index={props.index}
         />
       );
     default:
@@ -87,8 +100,10 @@ const NumButton = (props) => {
             className=" absolute left-0 inset-y-0 px-1.5 text-gray-400" 
             id={`${props.id}-minus-btn`}
             onClick={() => {
-              if(num > 0)
-                setNum(num - 1)
+              if(num > 0) {
+                setNum(num - 1);
+                props.updateFieldValues(num - 1, props.index);
+              };
               }}
           >
             <svg 
@@ -118,13 +133,17 @@ const NumButton = (props) => {
               if (!isNaN(num)) {
                 setNum(num);
               }
+              props.updateFieldValues(num, props.index)
             }}
             />
           <button 
             type="button" 
             className=" absolute right-0 inset-y-0 px-1.5 text-gray-400" 
             id={`${props.id}-plus-btn`}
-            onClick={() => {setNum(num + 1)}}
+            onClick={() => {
+              setNum(num + 1)
+              props.updateFieldValues(num + 1, props.index)
+              }}
           >
             <svg 
               className="w-6 h-6" 
@@ -166,17 +185,9 @@ const SubmitButton = (props) => {
 };
 
 export const Form = (props) => {
-  const handleSubmit = (e) => {
-    console.log("Submitted!")
-    e.preventDefault();
-    // if (!value) return;
-    // addTodo(value);
-    // setValue("");
-  };
-
   return (
     <div className="md:w-1/2">
-      <form id={props.formID} onSubmit={handleSubmit}>
+      <form id={props.formID} onSubmit={props.handleSubmit}>
         <div className="
             bg-white
             overflow-hidden
@@ -193,6 +204,8 @@ export const Form = (props) => {
                   inputType={field.inputType}
                   inputName={field.inputName}
                   inputID={field.inputID}
+                  index={index}
+                  updateFieldValues={props.updateFieldValues}
                   key={index}
                 />
               ))}
