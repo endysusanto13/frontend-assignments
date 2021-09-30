@@ -1,4 +1,5 @@
 import * as React from "react";
+import PropTypes from "prop-types";
 import {
   TrashIcon
 } from "@heroicons/react/solid";
@@ -8,7 +9,6 @@ export const ListingCart = (props) => {
 
   const deleteItem = () => {
     setIsDeleting(true)
-    console.log("WOO")
     props.removeFromCart()
   }
 
@@ -56,3 +56,15 @@ export const ListingCart = (props) => {
     </li>
   );
 };
+
+ListingCart.propTypes = {
+  title: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
+  /**
+   * Quantity of items added to shopping cart, not available quantity.
+   */
+  quantity: PropTypes.number.isRequired,
+  imageUrl: PropTypes.string,
+};
+
