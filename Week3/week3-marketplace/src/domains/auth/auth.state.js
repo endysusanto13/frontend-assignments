@@ -73,7 +73,7 @@ export const useAuth = () => {
 };
 
 const login = (email, password) =>
-  fetch("https://ecomm-service.herokuapp.com/login", {
+  fetch("https://endy-react-marketplace.herokuapp.com/login", {
     method: "POST",
     headers: {
       accept: "application/json",

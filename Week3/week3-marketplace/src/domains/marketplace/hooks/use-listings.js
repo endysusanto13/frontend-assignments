@@ -1,7 +1,7 @@
 import * as React from "react";
 
 const getListings = (page, signal) =>
-  fetch(`https://ecomm-service.herokuapp.com/marketplace?page=${page}`, {
+  fetch(`https://endy-react-marketplace.herokuapp.com/marketplace?page=${page}`, {
     signal,
   }).then((res) => res.json());
 

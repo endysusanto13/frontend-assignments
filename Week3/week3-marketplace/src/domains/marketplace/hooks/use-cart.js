@@ -1,7 +1,7 @@
 import * as React from "react";
 
 const getFromCart = (token, signal) =>
-  fetch("https://ecomm-service.herokuapp.com/marketplace/cart/items",{
+  fetch("https://endy-react-marketplace.herokuapp.com/marketplace/cart/items",{
     signal,
     headers: {
       accept: "application/json",
@@ -17,7 +17,7 @@ const getFromCart = (token, signal) =>
   });
 
 export const removeFromCart = (listingId, token) =>
-  fetch(`https://ecomm-service.herokuapp.com/marketplace/cart/items/${listingId}`, {
+  fetch(`https://endy-react-marketplace.herokuapp.com/marketplace/cart/items/${listingId}`, {
     method: "DELETE",
     body: JSON.stringify({
       listingId,
@@ -36,7 +36,7 @@ export const removeFromCart = (listingId, token) =>
 
 
 export const addToCart = (listingId, token) =>
-  fetch("https://ecomm-service.herokuapp.com/marketplace/cart/items", {
+  fetch("https://endy-react-marketplace.herokuapp.com/marketplace/cart/items", {
     method: "POST",
     body: JSON.stringify({
       quantity: 1,
