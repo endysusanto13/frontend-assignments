@@ -1,7 +1,7 @@
 import cn from "classnames";
 import PropTypes from "prop-types";
 import * as React from "react";
-import { callAll } from "../lib/call-all";
+import { callAll } from "lib/call-all";
 import { FieldContext } from "./field-context";
 
 /**

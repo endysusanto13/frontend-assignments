@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 import {
   TrashIcon
 } from "@heroicons/react/solid";
+import { formatPrice } from "lib/format-price";
+
 
 export const ListingCart = (props) => {
   const [isDeleting, setIsDeleting] = React.useState(false);
@@ -59,7 +61,6 @@ export const ListingCart = (props) => {
 
 ListingCart.propTypes = {
   title: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
   /**
    * Quantity of items added to shopping cart, not available quantity.

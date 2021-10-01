@@ -2,12 +2,8 @@ import * as React from "react";
 import { useAuth, LogoutButton } from "domains/auth";
 import { ListingItem, ListingCart, useListings, addToCart, useCart, removeFromCart } from "domains/marketplace";
 import { ShoppingBagIcon } from '@heroicons/react/solid';
+import { formatPrice } from "lib/format-price";
 
-const formatPrice = (price) => {
-  if (price % 1 !== 0)
-    price = (Math.round(price * 100) / 100).toFixed(2)
-  return price.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
-}
 
 export const MarketplacePrivate = () => {
   const auth = useAuth();
@@ -33,7 +29,7 @@ export const MarketplacePrivate = () => {
                   imageUrl={item.imageUrl}
                   title={item.title}
                   description={item.description}
-                  price={formatPrice(item.price)}
+                  price={item.price}
                   availableStock={item.numOfStock}
                   onlyOne={item.availability === "single-item"}
                   onAddToCart={
@@ -63,15 +59,15 @@ export const MarketplacePrivate = () => {
             <ul id="cart-item-list" className="divide-y divide-gray-200">
             {
               cart && cart.length === 0 ? (
-                <div class="px-4 sm:px-6 pb-12">
-                  <div class="pt-6 pb-5">
+                <div className="px-4 sm:px-6 pb-12">
+                  <div className="pt-6 pb-5">
                     <div id="no-cart-item-message">
-                      <div class="p-4 text-center">
+                      <div className="p-4 text-center">
                         <ShoppingBagIcon 
                           className="inline-block w-12 h-12 text-gray-300"
                         />
                       </div>
-                      <p class="text-center text-gray-500">
+                      <p className="text-center text-gray-500">
                         There is no item in your shopping cart.
                       </p>
                     </div>
@@ -82,7 +78,7 @@ export const MarketplacePrivate = () => {
                     <ListingCart 
                       imageUrl={item.listing.imageUrl}
                       title={item.listing.title}
-                      price={"$" + formatPrice(item.listing.price)}
+                      price={item.listing.price}
                       quantity={item.quantity}
                       removeFromCart={
                         auth.status === "authenticated"
@@ -99,7 +95,7 @@ export const MarketplacePrivate = () => {
           <div className="flex-shrink-0 px-4 py-4 flex justify-end border-t border-gray-200">
             <span>
               Total 
-                <span className="text-3xl">$
+                <span className="text-3xl font-bold">$
                   <span>
                   {cart &&
                     cart.map((item) => (cartTotal += item.listing.price)) &&

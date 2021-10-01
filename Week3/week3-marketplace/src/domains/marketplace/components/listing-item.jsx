@@ -6,6 +6,7 @@ import {
 import { Button } from "components/button";
 import PropTypes from "prop-types";
 import * as React from "react";
+import { formatPrice } from "lib/format-price";
 
 const EditButton = () => (
   <Button
@@ -49,7 +50,7 @@ export const ListingItem = (props) => {
         <div className="mt-1 flex-1">
           <div className="flex justify-between items-center gap-3">
             <div>
-              $ <span className="text-2xl font-bold">{props.price}</span>
+              $ <span className="text-2xl font-bold">{formatPrice(props.price)}</span>
             </div>
             {props.onlyOne ? (
               <Badge>Only One</Badge>
