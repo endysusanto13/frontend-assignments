@@ -98,7 +98,7 @@ export const MarketplacePrivate = () => {
                 <span className="text-3xl font-bold">$
                   <span>
                   {cart &&
-                    cart.map((item) => (cartTotal += item.listing.price)) &&
+                    cart.map((item) => (cartTotal += (item.listing.price * item.quantity))) &&
                     formatPrice(cartTotal)}
                   </span>
                 </span>

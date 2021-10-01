@@ -26,10 +26,10 @@ export const ListingCart = (props) => {
           <p className="text-sm font-medium text-gray-900">
             {props.title}
           </p>
-          <p className="text-sm text-gray-500">{props.price} x {props.quantity} pc</p>
+          <p className="text-sm text-gray-500">{formatPrice(props.price)} x {props.quantity} pc</p>
         </div>
         <div className="flex items-center gap-2">
-          <div>{props.price}</div>
+          <div>$ {formatPrice(props.price * props.quantity)}</div>
           {isDeleting ? (
             <button 
               type="button" 
