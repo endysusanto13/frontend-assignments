@@ -1,15 +1,14 @@
-import { Button } from "components/button";
-import { TextField } from "components/text-field";
 import * as React from "react";
 import { Link } from "react-router-dom";
-// import { useLogin } from "../auth.state";
-
+import { useLogin } from "domains/auth";
+import { Button } from "components/button";
+import { TextField } from "components/text-field";
 
 export const LoginForm = () => {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [status, setStatus] = React.useState("idle");
-  // const login = useLogin();
+  const login = useLogin();
 
   return (
     <div className="max-w-md mx-auto m-6 shadow-xl">
@@ -17,7 +16,7 @@ export const LoginForm = () => {
         onSubmit={(ev) => {
           ev.preventDefault();
           setStatus("loading");
-          // login({ email, password }).catch(() => setStatus("error"));
+          login({ email, password }).catch(() => setStatus("error"));
         }}
         className="p-6 bg-opacity-25 bg-white"
       >
@@ -52,7 +51,7 @@ export const LoginForm = () => {
           />
           <Button
             type="submit"
-            variant="primary"
+            variant="wideLight"
             className="w-full text-base"
             disabled={status === "loading"}
           >
@@ -60,22 +59,32 @@ export const LoginForm = () => {
           </Button>
           <div className="flex justify-between
           ">
-          <Button
-            type="submit"
-            variant="primary"
-            className="w-8/12 text-base bg-indigo-900"
-            disabled={status === "loading"}
-          >
-            Continue as Guest
-          </Button>
-          <Button
-            type="submit"
-            variant="primary"
-            className="w-3/12 text-base bg-indigo-900"
-            disabled={status === "loading"}
-          >
-            Sign Up
-          </Button>
+          <span className="w-8/12">
+            <Button
+              variant="wideDark"
+              disabled={status === "loading"}
+              render={(bProps) => (
+                <Link to={"/"} {...bProps}>
+                  {bProps.children}
+                </Link>
+              )}
+              >
+                Continue as Guest
+            </Button>
+          </span>
+          <span className="w-3/12">
+            <Button
+              variant="wideDark"
+              disabled={status === "loading"}
+              render={(bProps) => (
+                <Link to={"/register"} {...bProps}>
+                  {bProps.children}
+                </Link>
+              )}
+              >
+                Sign Up
+            </Button>
+          </span>
           </div>
         </div>
       </form>

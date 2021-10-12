@@ -1,111 +1,34 @@
-// import {
-//   PencilIcon,
-//   TrashIcon,
-//   ShoppingCartIcon,
-// } from "@heroicons/react/solid";
-// import { Button } from "components/button";
-// import PropTypes from "prop-types";
-// import * as React from "react";
-// import { Link } from "react-router-dom";
+import * as React from "react";
+import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
-// const EditButton = () => (
-//   <Button
-//     variant="primary"
-//     onClick={() => alert("Edit btn clicked, populate the form!")}
-//   >
-//     <PencilIcon className="h-4 w-4 mr-1.5" />
-//     EDIT
-//   </Button>
-// );
+export const ListingMovie = ({ movieId, posterUrl, title, overview}) => {
+  return(
+    <div className="flex flex-col justify-between">
+      <Link to={`/movie/${movieId}`}>
+        <img 
+          src={posterUrl} 
+          alt=""
+          className="flex-grow"
+        />
+      </Link>
+        <span className="flex-grow bg-indigo-600 max-h-4"></span>
+        {/* Tailwind line-clamp do not allow center vertical alignment */}
+        <span className="flex text-center font-bold bg-indigo-600 text-white line-clamp-2 py-1">
+          {title}
+        </span>
+        <span className="flex-grow bg-indigo-600 max-h-4"></span>
+        <span className="font-light text-sm text-justify line-clamp-4 text-indigo-900 leading-4">
+          {overview}
+        </span>
+        <span className="flex-grow"></span>
+      </div>
+  );
+};
 
-// const DeleteButton = ({ text, onClick }) => (
-//   <Button variant="outline" onClick={onClick}>
-//     <TrashIcon className="w-4 h-4 mr-1.5" />
-//     {text}
-//   </Button>
-// );
-
-// const Badge = ({ children }) => (
-//   <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
-//     {children}
-//   </span>
-// );
-
-// export const ListingItem = (props) => {
-//   const [isDeleting, setIsDeleting] = React.useState(false);
-
-//   return (
-//     <div className="relative flex flex-col">
-//       <div className="group block w-full rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-pink-500 overflow-hidden">
-//         <img
-//           src={props.imageUrl}
-//           alt=""
-//           className="object-cover pointer-events-none group-hover:opacity-75 h-48 w-full"
-//         />
-//         <button type="button" className="absolute inset-0 focus:outline-none">
-//           <span className="sr-only">View details for {props.title}</span>
-//         </button>
-//       </div>
-//       <div className="flex-1 flex md:flex-col justify-between items-start md:items-stretch gap-3 px-2">
-//         <div className="mt-1 flex-1">
-//           <div className="flex justify-between items-center gap-3">
-//             <div>
-//               $ <span className="text-2xl font-bold">{props.price}</span>
-//             </div>
-//             {props.onlyOne ? (
-//               <Badge>Only One</Badge>
-//             ) : (
-//               <div className="text-sm text-gray-500">
-//                 {props.availableStock} piece available
-//               </div>
-//             )}
-//           </div>
-//           <p className="block text-sm font-medium text-gray-900 truncate pointer-events-none">
-//             {props.title}
-//           </p>
-//           <p className="block text-sm font-medium text-gray-500 pointer-events-none">
-//             {props.description}
-//           </p>
-//         </div>
-//         <div className="flex flex-col md:flex-row gap-3 py-3">
-//           {props.onAddToCart ? (
-//             <Button variant="primary" onClick={props.onAddToCart}>
-//               <ShoppingCartIcon className="h-4 w-4 mr-1.5" /> ADD TO CART
-//             </Button>
-//           ) : props.editable ? (
-//             <>
-//               <EditButton />
-//               <DeleteButton
-//                 text={isDeleting ? "DELETING..." : "DELETE"}
-//                 onClick={() => setIsDeleting(!isDeleting)}
-//               />
-//             </>
-//           ) : (
-//             <Button
-//               variant="primary"
-//               render={(bProps) => (
-//                 <Link to={`/listing/${props.listingId}`} {...bProps}>
-//                   {bProps.children}
-//                 </Link>
-//               )}
-//             >
-//               LEARN MORE
-//             </Button>
-//           )}
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// ListingItem.propTypes = {
-//   title: PropTypes.string.isRequired,
-//   description: PropTypes.string.isRequired,
-//   price: PropTypes.number.isRequired,
-//   imageUrl: PropTypes.string,
-//   /**
-//    * Required if `onlyOne` is `false`.
-//    */
-//   availableStock: PropTypes.number,
-//   onlyOne: PropTypes.bool,
-// };
+ListingMovie.propTypes = {
+  movieId: PropTypes.string.isRequired,
+  posterUrl: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  overview: PropTypes.string.isRequired,
+};

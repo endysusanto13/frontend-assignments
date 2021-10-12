@@ -1,14 +1,16 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-
+import React from "react";
+import ReactDOM from "react-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-
 import './index.css';
+
+import { AuthProvider } from "domains/auth";
+
 import { LoginPage } from "./pages/login";
 import { RegisterPage } from "./pages/register";
 import { Movies } from "./pages/movies";
-import { MovieDetails } from "./pages/movie-details";
+import { MovieDetailsPage } from "./pages/movie-details";
+import { PageNotFound } from "./pages/404";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -21,6 +23,7 @@ const queryClient = new QueryClient({
 ReactDOM.render(
 <BrowserRouter>
   <QueryClientProvider client={queryClient}>
+    <AuthProvider>
       <Switch>
         <Route path="/login">
           <LoginPage />
@@ -28,16 +31,17 @@ ReactDOM.render(
         <Route path="/register">
           <RegisterPage />
         </Route>
-        <Route path="/movies/:movieID">
-          <MovieDetails />
+        <Route path="/movie/:movieId">
+          <MovieDetailsPage />
         </Route>
         <Route path="/" exact>
           <Movies />
         </Route>
         <Route path="*">
-        <h1>404 Page not found</h1>
+          <PageNotFound />
         </Route>
       </Switch>
+    </AuthProvider>
   </QueryClientProvider>
 </BrowserRouter>
   ,document.querySelector("#root")

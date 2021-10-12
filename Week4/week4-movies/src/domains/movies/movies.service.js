@@ -1,38 +1,34 @@
 import { fetchJson } from "lib/fetch-json";
 import { BASE_URL } from "const";
 
-let limit = 16
+const movieLimit = 16
 
-// export const addToCart = (listingId, token) =>
-//   fetchJson(`${BASE_URL}/marketplace/cart/items`, {
-//     method: "POST",
-//     body: {
-//       quantity: 1,
-//       listingId,
-//     },
-//     headers: {
-//       Authorization: `Bearer ${token}`,
-//     },
-//   });
+export const createComment = ({ rating, movieId, content, accessToken }) =>
+  fetchJson(`${BASE_URL}/movie/comment`, {
+    method: "POST",
+    body: {
+      rating,
+      movieId,
+      content
+    },
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
 
-// export const getCartItems = ({ token, signal }) =>
-//   fetchJson(`${BASE_URL}/marketplace/cart/items`, {
-//     headers: {
-//       Authorization: `Bearer ${token}`,
-//     },
-//     signal,
-//   });
+export const getComments = (movieId, signal) =>
+  fetchJson(`${BASE_URL}/movie/movie/${movieId}/comment`, { signal });
 
-// export const deleteCartItem = (listingId, { token }) =>
-//   fetchJson(`${BASE_URL}/marketplace/cart/items/${listingId}`, {
-//     method: "DELETE",
-//     headers: {
-//       Authorization: `Bearer ${token}`,
-//     },
-//   });
+export const deleteComments = ({ commentId, accessToken }) =>
+  fetchJson(`${BASE_URL}/movie/comment/${commentId}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
 
 export const getMovieListings = (page, signal) =>
-  fetchJson(`${BASE_URL}/movie?page=${page}&limit=${limit}`, {
+  fetchJson(`${BASE_URL}/movie?page=${page}&limit=${movieLimit}`, {
     signal,
   });
 

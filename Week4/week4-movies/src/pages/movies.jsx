@@ -1,8 +1,7 @@
 import * as React from "react";
-
-import { useListings } from "domains/movies";
-import { NavBar } from 'domains/movies/components/navbar';
-import { Footer } from 'domains/movies/components/footer';
+import { ArrowCircleLeftIcon, ArrowCircleRightIcon } from "@heroicons/react/outline"
+import { useListings, NavBar, Footer, ListingMovie } from "domains/movies";
+import { NumberLabel } from "components/number-label";
 
 export const Movies = () => {
   const { data: listings, page, setPage } = useListings();
@@ -10,37 +9,43 @@ export const Movies = () => {
   return(
     // CONTAINER - WHOLE PAGE
     <div className="container max-w-full mx-auto bg-indigo-100">
-      <NavBar 
-        onPageNav={true}
-      />
+      <NavBar>
+        <div className="flex flex-row items-center justify-center space-x-4">
+          <button
+            type="button"
+            disabled={page === 1}
+            onClick={() => setPage(page - 1)}
+          >
+            <ArrowCircleLeftIcon className="w-8 h-8 text-white"/>
+          </button>
+          <NumberLabel
+            type=""
+            variant="primary"
+            className="w-1/12 text-base"
+          >
+            {page}
+          </NumberLabel>
+          <button
+            type="button"
+            onClick={() => setPage(page + 1)}
+          >
+            <ArrowCircleRightIcon className="w-8 h-8 text-white"/>
+          </button>
+        </div>
+      </NavBar>
       {/* BODY SECTION */}
-      <div className="container max-w-4xl mx-auto pt-24 pb-12"> 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-x-12 gap-y-16">
+      <div className="container max-w-5xl mx-auto pt-24 pb-12"> 
+        <div className="grid md:grid-cols-4 sm:grid-cols-2 gap-x-12 gap-y-16">
           {listings &&
             listings.map((movie) => (
-                <div className="flex flex-col justify-between">
-                  <img 
-                    src={movie.posterUrl} 
-                    alt=""
-                    className=""
-                  />
-                  <span className="flex-grow bg-indigo-600"></span>
-                  {/* Tailwind line-clamp do not allow center vertical alignment */}
-                  <span
-                    className="flex text-center font-bold bg-indigo-600 text-white line-clamp-2 py-1"
-                  >
-                    {movie.title}
-
-                  </span>
-                  <span className="flex-grow bg-indigo-600"></span>
-                  <span 
-                    className="flex-grow font-light text-sm text-justify line-clamp-4 text-indigo-900 leading-4"
-                  >
-                    {movie.overview}
-                  </span>
-                </div>
+              <ListingMovie
+                posterUrl={movie.posterUrl}
+                title={movie.title}
+                overview={movie.overview}
+                movieId={movie._id}
+                key={movie._id}
+              />
           ))}
-                {/* #TODO add key prop */}
         </div>
       </div>
       <Footer/>
